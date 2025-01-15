@@ -4,8 +4,8 @@
             <div style="margin: 12px;">
                 <journey-ends 
                     v-if="legs.length > 0"
-                    :firstLeg="legs[0]['start']"
-                    :lastLeg="legs[endIndex]['end']"
+                    :first-leg="legs[0]['start']"
+                    :last-leg="legs[endIndex]['end']"
                 />
             </div>
 
@@ -43,14 +43,17 @@
             </div>
         </div>
         <div v-if="showLegs">
-            <div v-for="leg, legIndex in legs" v-bind:key="'leg-' + leg.id">
+            <div
+                v-for="leg, legIndex in legs"
+                :key="'leg-' + leg.id"
+            >
                 <journey-leg 
                     :end="endStop"
-                    :nextLegStart="legIndex < legs.length - 1 ? legs[legIndex + 1].start.dateTimeInISO : undefined" 
-                    :nextLegCityTransfer="legIndex < legs.length - 1 ? legs[legIndex + 1].type == 'STATION_CHANGE_PUBLIC_TRANSPORT': false" 
+                    :next-leg-start="legIndex < legs.length - 1 ? legs[legIndex + 1].start.dateTimeInISO : undefined" 
+                    :next-leg-city-transfer="legIndex < legs.length - 1 ? legs[legIndex + 1].type == 'STATION_CHANGE_PUBLIC_TRANSPORT': false" 
                     :leg="leg" 
-                    @loadConnection="$emit('loadConnection', $event)"
-                    @modifyJourney="modifyJourney($event, legIndex)"
+                    @load-connection="$emit('loadConnection', $event)"
+                    @modify-journey="modifyJourney($event, legIndex)"
                 />
             </div>
         </div>
@@ -69,19 +72,25 @@ import JourneyLeg from './JourneyLeg.vue'
 import JourneyOverView from './JourneyOverView.vue'
 
 export default {
-    props: {
-        filters: Object,
-        item: Object
-    },
-    emits: [
-        'loadConnection',
-        'modifyJourney'
-    ],
     components: {
         JourneyEnds,
         JourneyLeg,
         JourneyOverView
     },
+    props: {
+        filters: {
+            default: () => ({}),
+            type: Object
+        },
+        item: {
+            default: () => ({}),
+            type: Object
+        }
+    },
+    emits: [
+        'loadConnection',
+        'modifyJourney'
+    ],
     setup() {
         const { getConnections } = connections()
         return {

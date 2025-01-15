@@ -1,6 +1,9 @@
 <template>
     <table>
-        <tr v-for="terminus, index in termini" v-bind:key="'index-' + index + '-' + terminus.attribute">
+        <tr
+            v-for="terminus, index in termini"
+            :key="'index-' + index + '-' + terminus.attribute"
+        >
             <td>
                 {{ terminus.text }}
             </td>
@@ -22,12 +25,18 @@
 import StationName from './StationName.vue'
 export default {
     name: 'JourneyEnds',
-    props: {
-        firstLeg: Object,
-        lastLeg: Object
-    },
     components: {
         StationName
+    },
+    props: {
+        firstLeg: {
+            default: () => ({}),
+            type: Object
+        },
+        lastLeg: {
+            default: () => ({}),
+            type: Object
+        }
     },
     computed: {
         termini() {

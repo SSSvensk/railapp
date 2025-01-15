@@ -2,9 +2,9 @@
     <div class="journey-overview">
         <div 
             v-for="legP, index in legPortions" 
-            v-bind:key="'legv-' + index"
+            :key="'legv-' + index"
             class="leg-section"
-            v-bind:style="{
+            :style="{
                 'width': legP + '%'
             }"
         >

@@ -2,8 +2,8 @@
     <header>
         <div>
             <journey-filters 
-                :defaultData="$route.query" 
-                @startLoading="startLoading" 
+                :default-data="$route.query" 
+                @start-loading="startLoading" 
             />
 
             <div>
@@ -19,7 +19,7 @@
             Tulokset
             <journey-card 
                 v-for="(item, journeyIndex) in journeys" 
-                v-bind:key="'journey-' + journeyIndex" 
+                :key="'journey-' + journeyIndex" 
                 :filters="filters"
                 :item="item"
             />
@@ -27,14 +27,12 @@
     </div>
 </template>
 <script>
-import FromToInput from "../components/inputs/FromToInput.vue"
 import JourneyFilters from '../components/JourneyFilters.vue'
 import connections from "../components/composition/connections.js"
 import JourneyLoader from '../components/JourneyLoader.vue'
 import JourneyCard from '../components/JourneyCard.vue'
 export default {
     components: { 
-        FromToInput,
         JourneyCard,
         JourneyLoader,
         JourneyFilters

@@ -3,17 +3,15 @@
 <template>
     <div>
         <div>
-            <journey-filters @startLoading="startLoading" />
+            <journey-filters @start-loading="startLoading" />
         </div>
     </div>
 </template>
 <script>
-import FromToInput from "./inputs/FromToInput.vue"
 import JourneyFilters from './JourneyFilters.vue'
 import connections from "./composition/connections.js"
 export default {
     components: { 
-        FromToInput,
         JourneyFilters
     },
     setup() {

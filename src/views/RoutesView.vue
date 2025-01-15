@@ -2,7 +2,9 @@
     <div>
         <RouterLink to="/route">
             <WelcomeItem @click="navigateToRoute">
-                <template #heading>Tukholma - Kööpenhamina - Hampuri</template>
+                <template #heading>
+                    Tukholma - Kööpenhamina - Hampuri
+                </template>
                 <div>
                     Jatko: Koko Eurooppa
                 </div>
@@ -18,7 +20,9 @@
             </WelcomeItem>
         </RouterLink>
         <WelcomeItem>
-            <template #heading>Tukholma - Göteborg - Kiel</template>
+            <template #heading>
+                Tukholma - Göteborg - Kiel
+            </template>
             <div>
                 Jatko: Koko Eurooppa
             </div>

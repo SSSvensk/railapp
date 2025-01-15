@@ -1,16 +1,25 @@
 <template>
     <div style="width: 100%;">
-        <div style="position: relative; display: flex; flex-direction: row; align-items: center;" @click="showStops = !showStops">
+        <div
+            style="position: relative; display: flex; flex-direction: row; align-items: center;"
+            @click="showStops = !showStops"
+        >
             <div class="line" /> 
-            <v-icon :icon="showStops ? 'mdi-chevron-up' : 'mdi-chevron-down'" style="margin-left: 24px;" />
+            <v-icon
+                :icon="showStops ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                style="margin-left: 24px;"
+            />
             <div style="font-size: 14px; margin-left: 4px;">
                 {{ showStops ? 'Piilota' : 'Näytä' }} välipysähdykset
             </div>  
         </div>
-        <div v-show="showStops" style="width: 100%;">
+        <div
+            v-show="showStops"
+            style="width: 100%;"
+        >
             <div 
                 v-for="stop, stopIndex in stops" 
-                v-bind:key="'stop-' + stopIndex"
+                :key="'stop-' + stopIndex"
                 style="position: relative; display: flex; flex-direction: row; align-items: center; width: 100%;"
             >
                 <div class="extended-line" /> 
@@ -19,12 +28,12 @@
                     <station-item 
                         :coordinates="stop.geocoordinates"
                         :end="end"
-                        :legStartTime="legStartTime"
+                        :leg-start-time="legStartTime"
                         :name="stop.station" 
                         options
                         :time="stop.time" 
-                        @loadConnection="$emit('loadConnection', $event)"
-                        @selectAlternativeDeparture="$emit('selectAlternativeDeparture', $event)"
+                        @load-connection="$emit('loadConnection', $event)"
+                        @select-alternative-departure="$emit('selectAlternativeDeparture', $event)"
                     />
                 </div>
             </div>
@@ -33,9 +42,11 @@
 </template>
 <script>
 import StationItem from './StationItem.vue'
-import StationName from './StationName.vue'
 export default {
     name: 'LegStops',
+    components: { 
+        StationItem 
+    },
     props: {
         end: {
             required: true,
@@ -45,15 +56,15 @@ export default {
             required: true,
             type: String
         },
-        stops: Array
+        stops: {
+            default: () => [],
+            type: Array
+        }
     },
     emits: [
+        'loadConnection',
         'selectAlternativeDeparture'
     ],
-    components: { 
-        StationName,
-        StationItem 
-    },
     data() {
         return {
             showStops: false

@@ -2,7 +2,7 @@
     <div style="position: relative; display: flex; flex-direction: row; align-items: flex-start;">
         <div 
             class="end-connector" 
-            v-bind:style="{
+            :style="{
                 'height': start ? '100%' : '50%',
                 'top': start ? '20px' : '0%'
             }"
@@ -12,11 +12,11 @@
             <station-item 
                 :datetime="type != 'STATION_CHANGE_PUBLIC_TRANSPORT' ? datetime : ''" 
                 :end="end"
-                :legStartTime="datetime"
+                :leg-start-time="datetime"
                 :name="name" 
                 :options="options && start"
                 :time="time"
-                @selectAlternativeDeparture="$emit('selectAlternativeDeparture', $event)"
+                @select-alternative-departure="$emit('selectAlternativeDeparture', $event)"
             />
         </div>
     </div>
@@ -26,10 +26,22 @@
 import StationItem from './StationItem.vue'
 export default {
     name: 'JourneyEnd',
+    components: {
+        StationItem 
+    },
     props: {
-        datetime: String,
-        end: [Number, String],
-        name: String,
+        datetime: {
+            default: '',
+            type: String
+        },
+        end: {
+            default: undefined,
+            type: [Number, String]
+        },
+        name: {
+            default: '',
+            type: String
+        },
         options: {
             default: true,
             type: Boolean
@@ -42,13 +54,16 @@ export default {
             default: false,
             type: Boolean
         },
-        time: Object,
-        type: String
+        time: {
+            default: () => ({}),
+            type: Object
+        },
+        type: {
+            default: '',
+            type: String
+        }
     },
-    emits: ['selectAlternativeDeparture'],
-    components: {
-        StationItem 
-    }
+    emits: ['selectAlternativeDeparture']
 }
 </script>
 <style scoped>

@@ -5,7 +5,7 @@
             country="Finland" 
             :name="defaultData.startName"
             title="Lähtö Suomessa" 
-            @updateName="updateName('startName', $event)"
+            @update-name="updateName('startName', $event)"
         />
 
         <from-to-input
@@ -14,15 +14,21 @@
             label="Kautta"
         />
 
-        <v-btn append-icon="mdi-plus" @click="addViaStop">
-            {{ vias.length > 0 ? 'Poista välipysähdys' : 'Lisää välipysähdys' }}
-        </v-btn>
+        <div style="margin-bottom: 16px;">
+            <v-btn
+                append-icon="mdi-plus"
+                @click="addViaStop"
+            >
+                {{ vias.length > 0 ? 'Poista välipysähdys' : 'Lisää välipysähdys' }}
+            </v-btn>
+        </div>
+       
 
         <from-to-input 
             v-model="models.end" 
             label="Määränpää" 
             :name="defaultData.endName"
-            @updateName="updateName('endName', $event)"
+            @update-name="updateName('endName', $event)"
         />
         <v-row>
             <v-col>
@@ -37,14 +43,14 @@
                             <v-col v-if="models.option != 3">
                                 <span>Alkaa</span>
                                 <vue-date-picker 
-                                    v-model="models.startTime" 
+                                    v-model="startTime" 
                                     :time-picker="true"
                                 />
                             </v-col>
                             <v-col v-if="models.option != 3">
                                 <span>Loppuu</span>
                                 <vue-date-picker 
-                                    v-model="models.endTime" 
+                                    v-model="endTime" 
                                     :time-picker="true"
                                 />
                             </v-col>
@@ -59,15 +65,18 @@
                             <v-radio-group v-model="models.option">
                                 <v-radio 
                                     v-for="opt, index in nightOptions" 
-                                    v-bind:key="'index-' + index" 
+                                    :key="'index-' + index" 
                                     :label="opt.label" 
                                     :value="opt.value"
-                                ></v-radio>
+                                />
                             </v-radio-group>
                         </v-row>
                         <v-row>
                             <v-col>
-                                <v-btn color="primary" @click="startSearching">
+                                <v-btn
+                                    color="primary"
+                                    @click="startSearching"
+                                >
                                     Löydä matkasi
                                 </v-btn>
                             </v-col>
@@ -85,6 +94,10 @@ import FromToInput from "./inputs/FromToInput.vue"
 
 export default {
     name: 'JourneyFilters',
+    components: { 
+        FromToInput,
+        TextAndButtonInput 
+    },
     props: {
         defaultData: {
             default: () => ({}),
@@ -92,10 +105,6 @@ export default {
         }
     },
     emits: ['startLoading'],
-    components: { 
-        FromToInput,
-        TextAndButtonInput 
-    },
     data() {
         return {
             departing: '',
@@ -117,6 +126,8 @@ export default {
                 {label: 'Max 1 yhteys joka kestää koko ulkopuolisen aikavälin', value: '2'},
                 {label: 'Ei matkantekoa ajan ulkopuolella', value: '1'},
             ],
+            endTime: '',
+            startTime: '',
             vias: []
         }
     },
@@ -140,10 +151,14 @@ export default {
     created() {
         console.log('created!')
         if (this.defaultData.departure) {
+            this.startTime = this.models.startTime
+            this.endTime = this.models.endTime
             let obj = {...this.models, ...this.defaultData}
             obj['departure'] = new Date(this.defaultData['departure'])
             this.models = obj
         } else {
+            this.startTime = this.models.startTime
+            this.endTime = this.models.endTime
             this.models = {...this.models, ...this.defaultData}
         }
     },

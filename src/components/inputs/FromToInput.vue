@@ -21,17 +21,21 @@ export default {
             default: '',
             type: String
         },
-        modelValue: String,
+        modelValue: {
+            default: undefined,
+            type: String
+        },
         name: {
+            default: '',
             required: false,
             type: String
         },
         title: {
-            placeholder: 'Asema',
+            default: 'Asema',
             type: String
         }
     },
-    emits: ['updateName'],
+    emits: ['update:modelValue', 'updateName'],
     setup() {
         const { getLocations } = locations()
         return {

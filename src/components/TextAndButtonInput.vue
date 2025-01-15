@@ -33,6 +33,7 @@ export default {
             type: Number
         }
     },
+    emits: ['update:modelValue'],
     data() {
         return {
             v: '0'

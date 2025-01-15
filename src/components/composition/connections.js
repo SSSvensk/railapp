@@ -75,10 +75,9 @@ export default function connections() {
             }
 
             Promise.all(p).then(r => {
-                if (filters.endTime && filters.startTime) {
-                    const endHours = Number(filters.endTime.split(':')[0])
-                    const startHours = Number(filters.startTime.split(':')[0])
-                }
+                console.log(filters.endTime, filters.startTime)
+                const endHours = filters.endTime ? Number(filters.endTime.split(':')[0]) : ''
+                const startHours = filters.startTime ? Number(filters.startTime.split(':')[0]) : ''
                 
 
                 let index = 0

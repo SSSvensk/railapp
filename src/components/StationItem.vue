@@ -2,7 +2,7 @@
     <div>
         <div @click="toggleOptions">
             <span v-if="datetime">
-                {{ datetime ? new Date(datetime).toLocaleTimeString('fi-FI', { hour: "2-digit", minute: "2-digit" }) : ''  }}
+                {{ datetime ? new Date(datetime).toLocaleTimeString('fi-FI', { hour: "2-digit", minute: "2-digit" }) : '' }}
             </span>
             <span v-else-if="time">
                 {{ timeString }}
@@ -10,7 +10,10 @@
 
             <station-name :name="name" />
         </div>
-        <div v-if="options" v-show="showOptions">
+        <div
+            v-if="options"
+            v-show="showOptions"
+        >
             <div style="height: 70px;">
                 <v-row>
                     <v-col :xs="6">
@@ -31,7 +34,11 @@
             </div>
             <div v-show="laterConnections">
                 <table>
-                    <tr v-for="opt, index in optionalJourneys" v-bind:key="index" @click="selectNextDeparture(opt)">
+                    <tr
+                        v-for="opt, index in optionalJourneys"
+                        :key="index"
+                        @click="selectNextDeparture(opt)"
+                    >
                         <td style="width: 72px;">
                             klo {{ new Date(opt.departure).toLocaleTimeString('fi-FI', {hour: '2-digit', minute:'2-digit'}) }}
                         </td>
@@ -40,7 +47,10 @@
                         </td>
                         <td>
                             <span v-if="opt.departure.split('T')[0] != legStartDate">
-                                <v-icon icon="mdi-alert" size="x-small" />
+                                <v-icon
+                                    icon="mdi-alert"
+                                    size="x-small"
+                                />
                                 {{ new Date(opt.departure).toLocaleDateString('fi-FI') }}
                             </span>
                         </td>
@@ -57,18 +67,25 @@ import connections from "./composition/connections.js"
 import locations from "./composition/locations.js"
 export default {
     name: 'StationItem',
+    components: {
+        StationName
+    },
     props: {
         coordinates: {
+            default: () => ({}),
             required: false,
             type: Object
         },
         datetime: {
+            default: undefined,
             type: String
         },
         end: {
+            default: undefined,
             type: [Number, String]
         },
         name: {
+            default: '',
             type: String
         },
         options: {
@@ -76,18 +93,17 @@ export default {
             type: Boolean
         },
         legStartTime: {
+            default: '',
             type: String
         },
         time: {
+            default: () => ({}),
             type: Object
         }
     },
     emits: [
         'selectAlternativeDeparture'
     ],
-    components: {
-        StationName
-    },
     setup() {
         const { loadSimpleConnection } = connections()
         const { getLocations } = locations()

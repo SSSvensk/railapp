@@ -4,15 +4,21 @@
             <HelloWorld msg="Maata pitkin Eurooppaan (ja takaisin)" />
 
             <nav>
-                <RouterLink to="/">Planner</RouterLink>
-                <RouterLink to="/routes">Reitit</RouterLink>
-                <RouterLink to="/policies">Käytännöt</RouterLink>
-                <RouterLink to="/about">Linkit</RouterLink>
+                <RouterLink to="/">
+                    Planner
+                </RouterLink>
+                <RouterLink to="/routes">
+                    Reitit
+                </RouterLink>
+                <RouterLink to="/policies">
+                    Käytännöt
+                </RouterLink>
+                <RouterLink to="/about">
+                    Linkit
+                </RouterLink>
             </nav>
 
-            <div>
-        
-            </div>
+            <div />
         </div>
     </header>
 

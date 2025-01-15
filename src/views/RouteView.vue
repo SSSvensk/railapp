@@ -1,46 +1,59 @@
 <template>
-  <header>
-
-    <div class="wrapper">
-        <div>
-            <hello-world msg="Tukholma - Kööpenhamina - Hampuri" />
-        </div>
-
-        <nav>
+    <header>
+        <div class="wrapper">
             <div>
-                Peruslippu
+                <hello-world msg="Tukholma - Kööpenhamina - Hampuri" />
             </div>
-            <div>
-                Interrail
-            </div>
-        </nav>
 
-        <div>
-            <welcome-item>
-                <template #heading>Turku</template>
-                Juna saapuu Turun satamaan
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Turku - Tukholma</template>
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Tukholma</template>
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Tukholma - Kööpenhamina</template>
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Kööpenhamina</template>
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Kööpenhamina - Hampuri</template>
-            </welcome-item>
-            <welcome-item>
-                <template #heading>Hampuri</template>
-            </welcome-item>
+            <nav>
+                <div>
+                    Peruslippu
+                </div>
+                <div>
+                    Interrail
+                </div>
+            </nav>
+
+            <div>
+                <welcome-item>
+                    <template #heading>
+                        Turku
+                    </template>
+                    Juna saapuu Turun satamaan
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Turku - Tukholma
+                    </template>
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Tukholma
+                    </template>
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Tukholma - Kööpenhamina
+                    </template>
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Kööpenhamina
+                    </template>
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Kööpenhamina - Hampuri
+                    </template>
+                </welcome-item>
+                <welcome-item>
+                    <template #heading>
+                        Hampuri
+                    </template>
+                </welcome-item>
+            </div>
         </div>
-    </div>
-  </header>
+    </header>
 </template>
 <script>
 import WelcomeItem from '../components/WelcomeItem.vue';
